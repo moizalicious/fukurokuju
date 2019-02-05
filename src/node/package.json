@@ -1,0 +1,28 @@
+{
+  "name": "pcdrs",
+  "version": "1.0.0",
+  "description": "A Personalized Cross-Domain Recommendation System [Front-End]",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -o -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moizalicious/pcdrs.git"
+  },
+  "keywords": [
+    "Recommendation-System",
+    "Content-Filtering",
+    "Sentiment-Analysis"
+  ],
+  "author": "Moiz Mansoor Ali",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/moizalicious/pcdrs/issues"
+  },
+  "homepage": "https://github.com/moizalicious/pcdrs#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
