@@ -5,7 +5,26 @@ class AnilistInterface {
         this.accessToken = accessToken;
     }
 
-    request(query, variables, dataCallback, errorCallback) {
+    request(query, dataCallback, errorCallback) {
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + this.accessToken
+            },
+            body: JSON.stringify({
+                query: query
+            })
+        };
+
+        fetch(this.url, options).then(function(response) {
+            return response.json();
+            // TODO can replace the errorCallback with a generic error function.
+        }).then(dataCallback).catch(errorCallback);
+    }
+
+    requestWithVariables(query, variables, dataCallback, errorCallback) {
         var options = {
             method: 'POST',
             headers: {
@@ -23,4 +42,5 @@ class AnilistInterface {
             return response.json();
         }).then(dataCallback).catch(errorCallback);
     }
+
 }
