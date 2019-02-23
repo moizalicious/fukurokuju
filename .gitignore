@@ -4,8 +4,11 @@ node_modules
 # Python Virtual Environment
 python_environment
 
-# Flask Server Cache
+# Python Cache
 __pycache__
 
 # Natural Language Toolkit Data
 nltk_data
+
+# Pickled Files
+*.pickle
