@@ -2,6 +2,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 analyzer = SentimentIntensityAnalyzer()
 
-while True:
-    review = input("Enter Review :> ")
-    print(analyzer.polarity_scores(review))
+def sentiment(review):
+    polarity_scores = analyzer.polarity_scores(review)
+    print(polarity_scores)
+    return polarity_scores

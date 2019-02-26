@@ -5,18 +5,24 @@ var AnilistQuery = {
           name
         }
       }`,
-    GET_VIEWER_REVIEWS: `query($page: Int, $userId: Int){
-        Page(page: $page) {
-          pageInfo {
-            currentPage
-            hasNextPage
+    GET_VIEWER_REVIEWS: `query ($page: Int, $userId: Int) {
+      Page(page: $page) {
+        pageInfo {
+          currentPage
+          hasNextPage
+        }
+        reviews(userId: $userId) {
+          media {
+            title {
+              english
+              romaji
+            }
           }
-          reviews(userId: $userId) {
-            body(asHtml: false)
-          }
+          body(asHtml: false)
         }
       }
-      `,
+    }
+    `,
     GET_ANIME_SCORES_AND_NOTES: `query($userId: Int) {
         MediaListCollection(userId: $userId, type: ANIME) {
           lists {

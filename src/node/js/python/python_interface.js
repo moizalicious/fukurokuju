@@ -22,12 +22,9 @@ class PythonInterface {
 
 }
 
-function contactPython() {
+function contactPython(values) {
     let Backend = new PythonInterface('http://127.0.0.1:5000');
-    var data = {
-        'hello': 'world'
-    };
-    Backend.request('/get_json', data, function(response) {
+    Backend.request('/get_top_rated', values, function(response) {
         console.log(response);
     });
 }
