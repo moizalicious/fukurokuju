@@ -19,9 +19,10 @@ var AnilistQuery = {
             }
           }
           body(asHtml: false)
+          score
         }
       }
-    }
+    }    
     `,
     GET_ANIME_SCORES_AND_NOTES: `query($userId: Int) {
         MediaListCollection(userId: $userId, type: ANIME) {

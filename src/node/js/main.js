@@ -9,8 +9,8 @@ if (accessToken) {
         Anilist.requestWithVariables(AnilistQuery.GET_VIEWER_REVIEWS, { page: 1, userId: 14669 }, function (response) {
             console.log(response.data.Page.reviews);
             contactPython(response.data.Page.reviews);
-        }, toErrorPage);
-    }, toErrorPage);
+        });
+    });
 } else {
     window.location.replace('../index.html');
 }
