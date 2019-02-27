@@ -1,8 +1,8 @@
 class AnilistInterface {
 
-    constructor(url, accessToken) {
+    constructor(url) {
         this.url = url;
-        this.accessToken = accessToken;
+        // this.accessToken = accessToken;
     }
 
     request(query, dataCallback) {
@@ -10,8 +10,8 @@ class AnilistInterface {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + this.accessToken
+                'Accept': 'application/json'//,
+                // 'Authorization': 'Bearer ' + this.accessToken
             },
             body: JSON.stringify({
                 query: query
@@ -28,8 +28,8 @@ class AnilistInterface {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + this.accessToken
+                'Accept': 'application/json'//,
+                // 'Authorization': 'Bearer ' + this.accessToken
             },
             body: JSON.stringify({
                 query: query,

@@ -1,11 +1,11 @@
 var AnilistQuery = {
-    GET_VIEWER_INFO: `{
-        Viewer {
-          id
-          name
-        }
-      }`,
-    GET_VIEWER_REVIEWS: `query ($page: Int, $userId: Int) {
+  GET_USER_INFO: `query($name: String) {
+      User(name: $name) {
+        id
+        name
+      }
+    }`,
+  GET_USER_REVIEWS: `query($page: Int, $userId: Int) {
       Page(page: $page) {
         pageInfo {
           currentPage
@@ -22,9 +22,8 @@ var AnilistQuery = {
           score
         }
       }
-    }    
-    `,
-    GET_ANIME_SCORES_AND_NOTES: `query($userId: Int) {
+    }`,
+  GET_ANIME_SCORES_AND_NOTES: `query($userId: Int) {
         MediaListCollection(userId: $userId, type: ANIME) {
           lists {
             name
@@ -47,7 +46,7 @@ var AnilistQuery = {
           }
         }
       }`,
-      GET_MANGA_SCORES_AND_NOTES: `query($userId: Int) {
+  GET_MANGA_SCORES_AND_NOTES: `query($userId: Int) {
         MediaListCollection(userId: $userId, type: MANGA) {
           lists {
             name
