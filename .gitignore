@@ -2,7 +2,7 @@
 node_modules
 
 # Python Virtual Environment
-python_environment
+venv
 
 # Python Cache
 __pycache__

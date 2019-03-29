@@ -20,11 +20,12 @@ var AnilistQuery = {
           }
           body(asHtml: false)
           score
+          userId
         }
       }
     }`,
   GET_ANIME_SCORES_AND_NOTES: `query($userId: Int) {
-        MediaListCollection(userId: $userId, type: ANIME) {
+        MediaListCollection(userId: $userId, type: ANIME, sort: SCORE_DESC) {
           lists {
             name
             entries {
@@ -47,7 +48,7 @@ var AnilistQuery = {
         }
       }`,
   GET_MANGA_SCORES_AND_NOTES: `query($userId: Int) {
-        MediaListCollection(userId: $userId, type: MANGA) {
+        MediaListCollection(userId: $userId, type: MANGA, sort: SCORE_DESC) {
           lists {
             name
             entries {
@@ -69,6 +70,6 @@ var AnilistQuery = {
           }
         }
       }`
-}
+};
 
 Object.freeze(AnilistQuery);
