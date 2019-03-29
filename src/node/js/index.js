@@ -18,7 +18,7 @@ function onGetRecommendationsClick() {
 function getAnilistData(anilistId) {
     Anilist.request(AnilistQuery.GET_USER_INFO, { name: anilistId }, function (response) {
         var userId = response.data.User.id;
-        anilistUser.id = userId;
+        anilistUser.userId = userId;
         // sessionStorage.setItem('userId', userId);
         // sessionStorage.setItem('userName', response.data.User.name);
         Anilist.request(AnilistQuery.GET_ANIME_SCORES_AND_NOTES, { userId: userId }, function (response) {
@@ -58,7 +58,7 @@ function handleUserReviewsResponse(response) {
         Anilist.request(AnilistQuery.GET_USER_REVIEWS, { page: currentPage, userId: userId }, handleUserReviewsResponse);
     } else {
         anilistUser.reviews = reviews;
-        userData.anilistUser = anilistUser;
+        userData.anilistData = anilistUser;
         Backend.request(PythonRoute.GET_KEYWORDS, userData, function(response) {
             console.log(response);
         });
