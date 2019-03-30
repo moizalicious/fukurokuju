@@ -13,6 +13,7 @@ var AnilistQuery = {
         }
         reviews(userId: $userId) {
           media {
+            type
             title {
               english
               romaji
@@ -41,7 +42,7 @@ var AnilistQuery = {
                   color
                 }
               }
-              score
+              score(format: POINT_100)
               notes
             }
           }
@@ -64,7 +65,7 @@ var AnilistQuery = {
                   color
                 }
               }
-              score
+              score(format: POINT_100)
               notes
             }
           }

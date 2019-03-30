@@ -1,5 +1,5 @@
 
-def get_top_entries(list):
+def getTopEntries(list):
     # TODO - Complete
     topEntries = []
     return topEntries
