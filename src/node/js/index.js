@@ -59,8 +59,13 @@ function handleUserReviewsResponse(response) {
     } else {
         anilistUser.reviews = reviews;
         userData.anilistData = anilistUser;
-        Backend.request(PythonRoute.GET_KEYWORDS, userData, function(response) {
+        Backend.request(PythonRoute.GET_KEYWORDS, userData, function (response) {
             console.log(response);
         });
     }
 }
+
+let Goodreads = new GoodreadsInterface('https://www.goodreads.com', 'http://127.0.0.1:5000');
+Goodreads.request('/review/list?id=87521241&key='+GOODREADS_API_KEY+'&v=2', function(response) {
+    console.log(response);
+});

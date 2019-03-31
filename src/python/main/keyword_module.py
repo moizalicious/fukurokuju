@@ -23,8 +23,6 @@ def extractAnilistKeywords(anilist_user_data):
     # Get information that is both reviewed and scored
     reviewed_and_scored = AnilistUtils.mergeReviewedAndScoredLists(animelist, mangalist, reviews)
 
-    print(reviewed_and_scored)
-
     # Remove review_and_scored information from original lists
     animelist = AnilistUtils.removeDuplicateAnimeEntries(animelist, reviewed_and_scored)
     mangalist = AnilistUtils.removeDuplicateMangaEntries(mangalist, reviewed_and_scored)
@@ -42,13 +40,26 @@ def extractAnilistKeywords(anilist_user_data):
     #             if entry['title'] == manga['title']:
     #                 mangalist.remove(manga)
 
+    # keywords = {
+    #     'userId': anilist_user_data['userId'],
+    #     'animelist': animelist,
+    #     'mangalist': mangalist,
+    #     'reviews': reviews,
+    #     'reviewedAndScored': reviewed_and_scored
+    # }
 
-    keywords = {
-        'userId': anilist_user_data['userId'],
-        'animelist': animelist,
-        'mangalist': mangalist,
-        'reviews': reviews,
-        'reviewedAndScored': reviewed_and_scored
-    }
+    # print('Anime Rated: ', len(animelist))
+    # for anime in animelist:
+    #     print(anime)
+
+    keywords = []
+    if len(animelist) >= 10:
+        for i in range(0, 10):
+            keywords.append(animelist[i]['title'])
+    elif len(animelist) < 10:
+        for anime in animelist:
+            keywords.append(anime['title'])
+
+    # print(keywords)
 
     return keywords

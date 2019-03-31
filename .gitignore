@@ -12,3 +12,6 @@ nltk_data
 
 # Pickled Files
 *.pickle
+
+# API Keys
+api_keys.js
