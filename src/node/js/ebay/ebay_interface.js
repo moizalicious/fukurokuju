@@ -1,6 +1,4 @@
-let xml2JsonParser = new X2JS();
-
-class GoodreadsInterface {
+class EbayInterface {
 
     constructor(url, backendURL) {
         this.url = url;
@@ -20,11 +18,11 @@ class GoodreadsInterface {
             body: JSON.stringify(body)
         };
 
-        fetch(this.backendURL + '/request_goodreads', options).then(function(response) {
+        fetch(this.backendURL + '/request_ebay', options).then(function(response) {
             return response.json();
         }).then(function(value) {
-            var jsonObject = xml2JsonParser.xml_str2json(value);
-            return jsonObject;
+            var result = JSON.parse(value);
+            return result;
         }).then(dataCallback).catch(function(error) {
             console.error(error);
         });

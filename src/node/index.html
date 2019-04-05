@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- TODO change the information if access token is already there -->
     <meta charset="utf-8" />
     <title>PCDRS</title>
     <meta name="description" content="A Personalized Cross-Domain Recommendation System [Front-End]" />
@@ -16,6 +15,10 @@
     <script src="js/anilist/anilist_queries.js"></script>
 
     <script src="js/goodreads/goodreads_interface.js"></script>
+    <script src="js/goodreads/goodreads_routes.js"></script>
+
+    <script src="js/ebay/ebay_interface.js"></script>
+    <script src="js/ebay/ebay_routes.js"></script>
 
     <script src="js/python/python_interface.js"></script>
     <script src="js/python/python_routes.js"></script>
@@ -26,16 +29,16 @@
 </head>
 
 <body>
-    <h1>Hello World!</h1>
+    <h1>Enter Credentials</h1>
     <label for="anilistId">Your Anilist Username:&nbsp;</label>
     <input id="anilistId" type="text" required />
     <br />
     <br />
+    <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
+    <input id="goodreadsId" type="text" required />
+    <br />
+    <br />
     <button onclick="onGetRecommendationsClick()">Get Recommendations</button>
-    <!-- <a href="https://anilist.co/api/v2/oauth/authorize?client_id=731&response_type=token">Login with AniList</a> -->
-    <!-- <br /> -->
-    <!-- <br /> -->
-    <!-- <a href="https://www.goodreads.com/oauth/request_token?key=vT5TpyQgF3vHTGRQvg&secret=ETJEEOIh4deCAaLoI89zttJvFQScIb4IAcER6rnA2n4">Login With GoodReads</a> -->
 </body>
 
 </html>

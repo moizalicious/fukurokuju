@@ -18,5 +18,11 @@ def requestGoodreads():
     response = requests.get(body['route'])
     return jsonify(response.text)
 
+@app.route('/request_ebay', methods=['POST'])
+def requestEbay():
+    body = request.get_json()
+    response = requests.get(body['route'])
+    return jsonify(response.text)
+
 if __name__ == '__main__':
     app.run(debug=True)

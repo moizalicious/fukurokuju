@@ -1,4 +1,4 @@
 function toErrorPage(error) {
-    console.log(error);
-    window.location.replace("/html/error.html");
+    console.error(error);
+    // window.location.replace("/html/error.html");
 }

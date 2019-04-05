@@ -21,10 +21,3 @@ class PythonInterface {
     }
 
 }
-
-// function contactPython(values) {
-//     let Backend = new PythonInterface('http://127.0.0.1:5000');
-//     Backend.request('/get_top_rated', values, function(response) {
-//         console.log(response);
-//     });
-// }
