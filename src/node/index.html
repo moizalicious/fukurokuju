@@ -2,10 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>PCDRS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <meta name="description" content="A Personalized Cross-Domain Recommendation System [Front-End]" />
     <meta name="author" content="Moiz Mansoor Ali" />
+
+    <title>PCDRS</title>
+
+    <link rel="stylesheet" href="lib/bootstrap-4.3.1-dist/bootstrap.min.css">
 
     <script src="lib/xml2json/xml2json.min.js"></script>
 
@@ -32,16 +37,22 @@
 </head>
 
 <body>
-    <h1>Enter Credentials</h1>
-    <label for="anilistId">Your Anilist Username:&nbsp;</label>
-    <input id="anilistId" type="text" required />
-    <br />
-    <br />
-    <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
-    <input id="goodreadsId" type="text" required />
-    <br />
-    <br />
-    <button onclick="onGetRecommendationsClick()">Get Recommendations</button>
+    <div class="container">
+        <div class="card">
+            <h5 class="card-header">Enter Credentials</h5>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="anilistId">Your Anilist Username:&nbsp;</label>
+                    <input id="anilistId" type="text" placeholder="user123" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
+                    <input id="goodreadsId" type="text" placeholder="12345678" class="form-control" />
+                </div>
+                <button onclick="onGetRecommendationsClick()" class="btn btn-primary">Get Recommendations</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
