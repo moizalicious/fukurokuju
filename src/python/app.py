@@ -1,15 +1,21 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from main.keyword_module import extractKeywords
+from main.keyword_module import extractAnilistKeywords, extractGoodreadsKeywords
 import requests
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/get_keywords', methods=['POST'])
-def getKeywords():
-    user_data = request.get_json()
-    keywords = extractKeywords(user_data)
+@app.route('/get_anilist_keywords', methods=['POST'])
+def getAnilistKeywords():
+    anilist_user_data = request.get_json()
+    keywords = extractAnilistKeywords(anilist_user_data)
+    return jsonify(keywords)
+
+@app.route('/get_goodreads_keywords', methods=['POST'])
+def getGoodreadsKeywords():
+    goodreads_user_data = request.get_json()
+    keywords = extractGoodreadsKeywords(goodreads_user_data)
     return jsonify(keywords)
 
 @app.route('/request_goodreads', methods=['POST'])

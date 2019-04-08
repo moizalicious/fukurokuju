@@ -2,17 +2,17 @@ from main.sentiment_module import sentiment
 from main.filtering_module import getTopEntries
 from main.utils import AnilistUtils
 
-def extractKeywords(user_data):
-    keywords = {}
-    if 'anilistData' in user_data:
-        anilist_user_data = user_data['anilistData']
-        keywords['anilistKeywords'] = extractAnilistKeywords(anilist_user_data)
+# def extractKeywords(user_data):
+#     keywords = {}
+#     if 'anilistData' in user_data:
+#         anilist_user_data = user_data['anilistData']
+#         keywords['anilistKeywords'] = extractAnilistKeywords(anilist_user_data)
     
-    if 'goodreadsData' in user_data:
-        goodreads_user_data = user_data['goodreadsData']
-        keywords['goodreadsKeywords'] = extractGoodreadsKeywords(goodreads_user_data)
+#     if 'goodreadsData' in user_data:
+#         goodreads_user_data = user_data['goodreadsData']
+#         keywords['goodreadsKeywords'] = extractGoodreadsKeywords(goodreads_user_data)
 
-    return keywords
+#     return keywords
 
 def extractAnilistKeywords(anilist_user_data):
     animelist = anilist_user_data['animelist']
@@ -72,4 +72,15 @@ def extractAnilistKeywords(anilist_user_data):
     return keywords
 
 def extractGoodreadsKeywords(goodreads_user_data):
-    return goodreads_user_data
+    # for review in goodreads_user_data['reviews']:
+    #     print('Title: ',review['book']['title'],'Rating: ',review['rating'],'Body: ',review['body'])
+
+    keywords = []
+    if len(goodreads_user_data['reviews']) >= 5:
+        for i in range(0,5):
+            keywords.append(goodreads_user_data['reviews'][i]['book']['title'])
+    elif len(goodreads_user_data['reviews']) < 5:
+        for review in goodreads_user_data['reviews']:
+            keywords.append(review['book']['title'])
+
+    return keywords

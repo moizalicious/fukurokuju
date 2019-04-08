@@ -3,7 +3,6 @@ let Goodreads = new GoodreadsInterface('https://www.goodreads.com', 'http://127.
 let Ebay = new EbayInterface('http://svcs.ebay.com', 'http://127.0.0.1:5000');
 let Backend = new PythonInterface('http://127.0.0.1:5000');
 
-var userData = {};
 var anilistData = {};
 var anilistReviews = [];
 var goodreadsData = {};
@@ -32,6 +31,7 @@ function onGetRecommendationsClick() {
 function getAnilistAndGoodreadsData(anilistId, goodreadsId) {
     // TODO - complete
     getAnilistData(anilistId);
+    getGoodreadsData(goodreadsId);
 }
 
 function getAnilistData(anilistId) {
@@ -53,7 +53,6 @@ function getGoodreadsData(goodreadsId) {
 }
 
 function flush() {
-    userData = {};
     anilistData = {};
     anilistReviews = [];
     goodreadsData = {};
