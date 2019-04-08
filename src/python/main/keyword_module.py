@@ -3,9 +3,16 @@ from main.filtering_module import getTopEntries
 from main.utils import AnilistUtils
 
 def extractKeywords(user_data):
-    anilist_user_data = user_data['anilistData']
-    anilist_keywords = extractAnilistKeywords(anilist_user_data)
-    return anilist_keywords
+    keywords = {}
+    if 'anilistData' in user_data:
+        anilist_user_data = user_data['anilistData']
+        keywords['anilistKeywords'] = extractAnilistKeywords(anilist_user_data)
+    
+    if 'goodreadsData' in user_data:
+        goodreads_user_data = user_data['goodreadsData']
+        keywords['goodreadsKeywords'] = extractGoodreadsKeywords(goodreads_user_data)
+
+    return keywords
 
 def extractAnilistKeywords(anilist_user_data):
     animelist = anilist_user_data['animelist']
@@ -53,13 +60,16 @@ def extractAnilistKeywords(anilist_user_data):
     #     print(anime)
 
     keywords = []
-    if len(animelist) >= 10:
-        for i in range(0, 10):
+    if len(animelist) >= 5:
+        for i in range(0, 5):
             keywords.append(animelist[i]['title'])
-    elif len(animelist) < 10:
+    elif len(animelist) < 5:
         for anime in animelist:
             keywords.append(anime['title'])
 
     # print(keywords)
 
     return keywords
+
+def extractGoodreadsKeywords(goodreads_user_data):
+    return goodreads_user_data

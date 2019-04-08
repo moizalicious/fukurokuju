@@ -20,7 +20,7 @@ class GoodreadsInterface {
             body: JSON.stringify(body)
         };
 
-        fetch(this.backendURL + '/request_goodreads', options).then(function(response) {
+        fetch(this.backendURL + PythonRoute.REQUEST_GOODREADS, options).then(function(response) {
             return response.json();
         }).then(function(value) {
             var jsonObject = xml2JsonParser.xml_str2json(value);

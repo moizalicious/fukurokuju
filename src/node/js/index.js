@@ -7,6 +7,7 @@ var userData = {};
 var anilistData = {};
 var anilistReviews = [];
 var goodreadsData = {};
+var goodreadsReviews = [];
 
 function onGetRecommendationsClick() {
     flush();
@@ -26,7 +27,6 @@ function onGetRecommendationsClick() {
     } else {
         console.error('You have not entered your Anilist or Goodreads credentials');
     }
-
 }
 
 function getAnilistAndGoodreadsData(anilistId, goodreadsId) {
@@ -42,35 +42,29 @@ function getAnilistData(anilistId) {
             anilistData.animelist = filterMediaListCollection(response.data.MediaListCollection);
             Anilist.request(AnilistQuery.GET_MANGA_SCORES_AND_NOTES, { userId: userId }, function (response) {
                 anilistData.mangalist = filterMediaListCollection(response.data.MediaListCollection);
-                Anilist.request(AnilistQuery.GET_USER_REVIEWS, { page: 1, userId: userId }, handleUserReviewsResponse);
+                Anilist.request(AnilistQuery.GET_USER_REVIEWS, { page: 1, userId: userId }, handleAnilistUserReviewsResponse);
             });
         });
     });
 }
 
 function getGoodreadsData(goodreadsId) {
-    Goodreads.request(GoodreadsRoute.GET_REVIEW_LIST + goodreadsId, function(response) {
-        // TODO get full lists
+    Goodreads.request(GoodreadsRoute.GET_REVIEW_LIST + goodreadsId, handleGoodreadsUserReviewsResponse);
+}
 
-        var title = '';
-        if (response.GoodreadsResponse) {
-            response.GoodreadsResponse.reviews.review.forEach(function(r) {
-                if (r.rating != 0) {
-                    title = r.book.title;
-                }
-            });
-        } else {
+function handleGoodreadsUserReviewsResponse(response) {
+    if (response.GoodreadsResponse) {
+        goodreadsReviews = response.GoodreadsResponse.reviews.review;
+        goodreadsData.reviews = goodreadsReviews;
+        userData.goodreadsData = goodreadsData;
+        console.log(userData);
+        Backend.request(PythonRoute.GET_KEYWORDS, userData, function(response) {
             console.log(response);
-        }
-
-        if (title != '') {
-            const regex = / /gm;
-            title = title.replace(regex, '%20');
-            Ebay.request(EbayRoute.GET_ITEMS + title, function(response) {
-                console.log(response.findItemsByKeywordsResponse[0].searchResult[0]);
-            });
-        }
-    });
+            // TODO - do ebay request here
+        });
+    } else {
+        console.log(response);
+    }
 }
 
 function filterMediaListCollection(MediaListCollection) {
@@ -81,7 +75,7 @@ function filterMediaListCollection(MediaListCollection) {
     return media;
 }
 
-function handleUserReviewsResponse(response) {
+function handleAnilistUserReviewsResponse(response) {
     var userId = 0;
     if (response.data.Page.reviews[0]) {
         anilistReviews = anilistReviews.concat(response.data.Page.reviews);
@@ -93,16 +87,16 @@ function handleUserReviewsResponse(response) {
 
     if (hasNextPage) {
         currentPage++;
-        Anilist.request(AnilistQuery.GET_USER_REVIEWS, { page: currentPage, userId: userId }, handleUserReviewsResponse);
+        Anilist.request(AnilistQuery.GET_USER_REVIEWS, { page: currentPage, userId: userId }, handleAnilistUserReviewsResponse);
     } else {
         anilistData.reviews = anilistReviews;
         userData.anilistData = anilistData;
         Backend.request(PythonRoute.GET_KEYWORDS, userData, function (response) {
-            if (response[0]) {
-                var title = response[0];
+            if (response.anilistKeywords[0]) {
+                var title = response.anilistKeywords[0];
                 const regex = / /gm;
                 title = title.replace(regex, '%20');
-                Ebay.request(EbayRoute.GET_ITEMS + title, function(response) {
+                Ebay.request(EbayRoute.GET_ITEMS + title, function (response) {
                     console.log(response.findItemsByKeywordsResponse[0].searchResult[0]);
                 });
             }
@@ -115,6 +109,7 @@ function flush() {
     anilistData = {};
     anilistReviews = [];
     goodreadsData = {};
+    goodreadsReviews = [];
 }
 
 // Goodreads.request(GoodreadsRoute.GET_REVIEW_LIST + '87521241', function(response) {

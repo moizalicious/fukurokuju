@@ -18,7 +18,7 @@ class EbayInterface {
             body: JSON.stringify(body)
         };
 
-        fetch(this.backendURL + '/request_ebay', options).then(function(response) {
+        fetch(this.backendURL + PythonRoute.REQUEST_EBAY, options).then(function(response) {
             return response.json();
         }).then(function(value) {
             var result = JSON.parse(value);
