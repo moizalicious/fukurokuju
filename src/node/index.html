@@ -130,7 +130,7 @@
                 <!-- Navbar -->
 
                 <!-- Body -->
-                <div id="recommendations" class="p-3 flex-grow-1" style="background-color: #ecf0f1;">
+                <div id="recommendations" class="p-3 flex-grow-1" style="background-color: #ecf0f1;overflow-y: scroll">
                 </div>
                 <!-- Body -->
 
@@ -143,5 +143,12 @@
     </div>
     <!-- Main Container -->
 </body>
+
+<script>
+    $(document).ready(function() {
+        var recommendationPanelHeight = $('#recommendations').outerHeight();
+        $('#recommendations').css('max-height', recommendationPanelHeight + 'px');
+    });
+</script>
 
 </html>

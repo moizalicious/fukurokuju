@@ -1,19 +1,36 @@
+var i = 0;
+var rowNo = 0;
+
 class EbayUtils {
 
     static handleEbayItemRequest(response) {
         var items = response.findItemsByKeywordsResponse[0].searchResult[0].item;
         console.log(items);
+        var length = items.length;
         items.forEach(function (item) {
-            $('#recommendations').append(
-                '<div class="card" style="width: 18rem;">' +
+            if ((i % 3) == 0) {
+               $('#recommendations').append('<div id="row'+rowNo+'" class="row p-3"></div>'); 
+            }
+
+            $('#row'+rowNo).append(
+                '<div class="col">' +
+                '<div class="card" style="width: 18rem;height: 40rem;">' +
                 '<img src="' + item.galleryURL[0] + '" class="card-img-top" alt="' + item.galleryURL[0] + '">' +
                 '<div class="card-body">' +
                 '<h5 class="card-title">' + item.title[0] + '</h5>' +
                 '<p class="card-text">Ebay Item</p>' +
                 '<a href="' + item.viewItemURL[0] + '" class="btn btn-primary">See Item</a>' +
                 '</div>' +
+                '</div>' +
                 '</div>'
             );
+            
+            if ((i % 3) == 2) {
+                // $('#recommendations').append('</div>');
+                rowNo++;
+            }
+
+            i++;
         });
     }
 
