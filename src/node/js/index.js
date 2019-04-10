@@ -29,7 +29,6 @@ function onGetRecommendationsClick() {
 }
 
 function getAnilistAndGoodreadsData(anilistId, goodreadsId) {
-    // TODO - complete
     getAnilistData(anilistId);
     getGoodreadsData(goodreadsId);
 }

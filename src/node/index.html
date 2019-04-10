@@ -41,8 +41,13 @@
 </head>
 
 <body>
+    <!-- Main Container -->
     <div class="container-fluid" style="height: 100vh;">
+
+        <!-- Main Row -->
         <div class="row" style="height: 100vh;">
+
+            <!-- First Column -->
             <div class="col-3"
                 style="padding-top: 15px;padding-bottom: 15px;background-color: #F7F7F7;border-right: 2px solid #3498db">
                 <div class="card" style="border-color: #3498db">
@@ -68,7 +73,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col pr-0 pl-0">
+            <!-- First Column -->
+
+            <!-- Second Column -->
+            <div class="col pr-0 pl-0 d-flex flex-column">
+
+                <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-dark"
                     style="background-color: #2980B9; border-bottom: 2px solid #3498db">
                     <span class="navbar-brand mb-0 h1">PCDRS Dashboard</span>
@@ -80,27 +90,58 @@
                                     moizalicious@gmail.com
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                        data-target="#profileSettingsModal">Settings</a>
                                     <a class="dropdown-item" href="#">Logout</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                </nav>
-                <div style="padding: 1rem;background-color: #ecf0f1">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <!-- Profile Settings Modal -->
+                    <div class="modal fade" id="profileSettingsModal" tabindex="-1" role="dialog"
+                        aria-labelledby="profileSettingsModalTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="profileSettingsModalTitle">Profile Settings</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="x">Your Anilist Username:&nbsp;</label>
+                                        <input id="x" type="text" placeholder="user123" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="y">Your Goodreads ID:&nbsp;</label>
+                                        <input id="y" type="text" placeholder="12345678" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Profile Settings Modal -->
+                </nav>
+                <!-- Navbar -->
+
+                <!-- Body -->
+                <div id="recommendations" class="p-3 flex-grow-1" style="background-color: #ecf0f1;">
                 </div>
+                <!-- Body -->
+
             </div>
+            <!-- Second Column -->
+
         </div>
+        <!-- Main Row -->
+
     </div>
+    <!-- Main Container -->
 </body>
 
 </html>
