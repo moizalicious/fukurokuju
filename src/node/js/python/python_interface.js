@@ -15,9 +15,7 @@ class PythonInterface {
 
         fetch(this.url + route, options).then(function(response) {
             return response.json();
-        }).then(dataCallback).catch(function(error) {
-            console.error(error);
-        });
+        }).then(dataCallback).catch(showError);
     }
 
 }

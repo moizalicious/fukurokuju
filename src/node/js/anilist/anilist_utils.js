@@ -25,7 +25,7 @@ class AnilistUtils {
 
                     });
                 } else {
-                    console.error(response);
+                    showError(response);
                 }
             });
         }

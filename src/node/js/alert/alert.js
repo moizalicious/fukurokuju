@@ -3,6 +3,7 @@ function toErrorPage(error) {
 }
 
 function showWarning(message) {
+    console.warn(message);
     $('#warningText').html(message);
     $('#warning').show();
 }
@@ -12,6 +13,7 @@ function closeWarning() {
 }
 
 function showError(message) {
+    console.error(message);
     $('#errorText').html(message);
     $('#error').show();
 }

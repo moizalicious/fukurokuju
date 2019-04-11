@@ -4,9 +4,14 @@ var rowNo = 0;
 class EbayUtils {
 
     static handleEbayItemRequest(response) {
+
+        if ($('#recommendations').hasClass('d-flex')) {
+            $('#recommendations').removeClass('d-flex');
+            $('#recommendations').html('');
+        }
+
         var items = response.findItemsByKeywordsResponse[0].searchResult[0].item;
         console.log(items);
-        var length = items.length;
         items.forEach(function (item) {
             if ((i % 3) == 0) {
                 $('#recommendations').append('<div id="row' + rowNo + '" class="row p-3"></div>');

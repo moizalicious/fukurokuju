@@ -23,9 +23,7 @@ class EbayInterface {
         }).then(function(value) {
             var result = JSON.parse(value);
             return result;
-        }).then(dataCallback).catch(function(error) {
-            console.error(error);
-        });
+        }).then(dataCallback).catch(showError);
     }
 
 }

@@ -19,7 +19,7 @@ class AnilistInterface {
 
         fetch(this.url, options).then(function(response) {
             return response.json();
-        }).then(dataCallback).catch(toErrorPage);
+        }).then(dataCallback).catch(showError);
     }
 
 }

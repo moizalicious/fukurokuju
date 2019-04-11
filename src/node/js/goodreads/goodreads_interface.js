@@ -25,9 +25,7 @@ class GoodreadsInterface {
         }).then(function(value) {
             var jsonObject = xml2JsonParser.xml_str2json(value);
             return jsonObject;
-        }).then(dataCallback).catch(function(error) {
-            console.error(error);
-        });
+        }).then(dataCallback).catch(showError);
     }
 
 }
