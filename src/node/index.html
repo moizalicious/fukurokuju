@@ -35,7 +35,7 @@
     <script src="js/python/python_interface.js"></script>
     <script src="js/python/python_routes.js"></script>
 
-    <script src="js/error/error.js"></script>
+    <script src="js/alert/alert.js"></script>
 
     <script src="js/index.js"></script>
 </head>
@@ -43,6 +43,31 @@
 <body>
     <!-- Main Container -->
     <div class="container-fluid" style="height: 100vh;">
+
+        <!-- Alert Row -->
+        <div class="row position-fixed p-3" style="z-index: 1000;width: 100%;">
+            <div class="col d-flex justify-content-center">
+                <!-- Warning Alert -->
+                <div id="warning" class="alert alert-warning alert-dismissible mb-0" role="alert"
+                    style="display: none;">
+                    <strong>Warning!</strong> <span id="warningText">Warning Message.</span>
+                    <button type="button" class="close" aria-label="Close" onclick="closeWarning()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Warning Alert -->
+
+                <!-- Error Alert -->
+                <div id="error" class="alert alert-danger alert-dismissible mb-0" role="alert" style="display: none;">
+                    <strong>Error!</strong> <span id="errorText">Error Message</span>
+                    <button type="button" class="close" aria-label="Close" onclick="closeError()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Error Alert -->
+            </div>
+        </div>
+        <!-- Alert Row -->
 
         <!-- Main Row -->
         <div class="row" style="height: 100vh;">
@@ -61,7 +86,8 @@
                             <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
                             <input id="goodreadsId" type="text" placeholder="12345678" class="form-control" />
                         </div>
-                        <button onclick="onGetRecommendationsClick()" class="btn btn-primary">Get
+                        <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
+                            class="btn btn-primary">Get
                             Recommendations</button>
                     </div>
                 </div>
@@ -145,7 +171,7 @@
 </body>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var recommendationPanelHeight = $('#recommendations').outerHeight();
         $('#recommendations').css('max-height', recommendationPanelHeight + 'px');
     });

@@ -14,17 +14,20 @@ function onGetRecommendationsClick() {
     var anilistId = document.getElementById('anilistId').value;
     var goodreadsId = document.getElementById('goodreadsId').value;
     if (anilistId != '' && goodreadsId != '') {
+        $('#getRecommendationsButton').prop('disabled', true);
         console.log('AnilistId - ' + anilistId);
         console.log('GoodreadsId - ' + goodreadsId);
         getAnilistAndGoodreadsData(anilistId, goodreadsId);
     } else if (anilistId != '') {
+        $('#getRecommendationsButton').prop('disabled', true);
         console.log('AnilistId - ' + anilistId);
         getAnilistData(anilistId);
     } else if (goodreadsId != '') {
+        $('#getRecommendationsButton').prop('disabled', true);
         console.log('GoodreadsId - ' + goodreadsId);
         getGoodreadsData(goodreadsId);
     } else {
-        console.error('You have not entered your Anilist or Goodreads credentials');
+        showWarning('You have not entered your Anilist or Goodreads credentials');
     }
 }
 
@@ -56,6 +59,7 @@ function flush() {
     anilistReviews = [];
     goodreadsData = {};
     goodreadsReviews = [];
+    $('#recommendations').html('');
 }
 
 // Goodreads.request(GoodreadsRoute.GET_REVIEW_LIST + '87521241', function(response) {
