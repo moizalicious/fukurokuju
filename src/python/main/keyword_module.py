@@ -2,27 +2,18 @@ from main.sentiment_module import sentiment
 from main.filtering_module import getTopEntries
 from main.utils import AnilistUtils
 
-# def extractKeywords(user_data):
-#     keywords = {}
-#     if 'anilistData' in user_data:
-#         anilist_user_data = user_data['anilistData']
-#         keywords['anilistKeywords'] = extractAnilistKeywords(anilist_user_data)
-    
-#     if 'goodreadsData' in user_data:
-#         goodreads_user_data = user_data['goodreadsData']
-#         keywords['goodreadsKeywords'] = extractGoodreadsKeywords(goodreads_user_data)
-
-#     return keywords
-
 def extractAnilistKeywords(anilist_user_data):
+    # Get anime list data, remove unscored entries and duplicate media titles
     animelist = anilist_user_data['animelist']
     animelist = AnilistUtils.removeUnscoredEntries(animelist)
     animelist = AnilistUtils.removeDuplicateMediaTitles(animelist)
     
+    # Get manga list data, remove unscored entries and duplicate media titles
     mangalist = anilist_user_data['mangalist']
     mangalist = AnilistUtils.removeUnscoredEntries(mangalist)
     mangalist = AnilistUtils.removeDuplicateMediaTitles(mangalist)
 
+    # Get reviews, remove duplicate media titles and unwated user id's
     reviews = anilist_user_data['reviews']
     reviews = AnilistUtils.removeDuplicateMediaTitles(reviews)
     reviews = AnilistUtils.removeUnwantedUserIds(reviews)
@@ -34,6 +25,12 @@ def extractAnilistKeywords(anilist_user_data):
     animelist = AnilistUtils.removeDuplicateAnimeEntries(animelist, reviewed_and_scored)
     mangalist = AnilistUtils.removeDuplicateMangaEntries(mangalist, reviewed_and_scored)
     reviews = AnilistUtils.removeDuplicateReviews(reviews, reviewed_and_scored)
+    
+    # Test get top entries method
+    getTopEntries(animelist)
+    getTopEntries(mangalist)
+    getTopEntries(reviews)
+
     # for entry in reviewed_and_scored:
     #     for review in reviews:
     #         if entry['title'] == review['title']:
@@ -66,8 +63,6 @@ def extractAnilistKeywords(anilist_user_data):
     elif len(animelist) < 5:
         for anime in animelist:
             keywords.append(anime['title'])
-
-    # print(keywords)
 
     return keywords
 
