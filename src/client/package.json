@@ -1,6 +1,6 @@
 {
   "name": "pcdrs",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A Personalized Cross-Domain Recommendation System [Front-End]",
   "main": "index.html",
   "scripts": {
@@ -14,9 +14,10 @@
     "url": "https://github.com/moizalicious/pcdrs.git"
   },
   "keywords": [
-    "Recommendation-System",
-    "Content-Filtering",
-    "Sentiment-Analysis"
+    "Cross-Domain Recommendation",
+    "Natural Language Processing",
+    "Sentiment Analysis",
+    "Content-Based Filtering"
   ],
   "author": "Moiz Mansoor Ali",
   "license": "Apache-2.0",

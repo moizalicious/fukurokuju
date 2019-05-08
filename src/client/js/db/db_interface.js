@@ -14,21 +14,53 @@ class DBInterface {
         };
 
         fetch(this.url + path, options)
-        .then(function(response) {
-            return response.json();
-        })
+            .then(function (response) {
+                return response.json();
+            })
             .then(callback)
-            .catch(function(error) {
+            .catch(function (error) {
                 console.error(error);
             });
     }
 
     put(path, value, callback) {
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: value
+        };
 
+        fetch(this.url + path, options)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(callback)
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 
     post(path, value, callback) {
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: value
+        };
 
+        fetch(this.url + path, options)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(callback)
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 
 }
