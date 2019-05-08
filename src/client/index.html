@@ -15,197 +15,41 @@
     <link rel="stylesheet" href="lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <script src="lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
-    <script src="lib/xml2json/xml2json.min.js"></script>
-
-    <script src="js/api_keys.js"></script>
-
-    <script src="js/anilist/anilist_interface.js"></script>
-    <script src="js/anilist/anilist_queries.js"></script>
-    <script src="js/anilist/anilist_utils.js"></script>
-
-    <script src="js/goodreads/goodreads_interface.js"></script>
-    <script src="js/goodreads/goodreads_routes.js"></script>
-    <script src="js/goodreads/goodreads_utils.js"></script>
-
-    <script src="js/ebay/ebay_interface.js"></script>
-    <script src="js/ebay/ebay_routes.js"></script>
-    <script src="js/ebay/ebay_utils.js"></script>
-
-    <script src="js/python/python_interface.js"></script>
-    <script src="js/python/python_routes.js"></script>
-
-    <script src="js/alert/alert.js"></script>
-
+    <script src="js/db/db_interface.js"></script>
     <script src="js/index.js"></script>
 </head>
 
 <body>
-    <!-- Main Container -->
-    <div class="container-fluid" style="height: 100vh;">
-
-        <!-- Alert Row -->
-        <div class="row position-fixed p-3" style="z-index: 1000;width: 100%;">
-            <div class="col d-flex justify-content-center">
-                <!-- Warning Alert -->
-                <div id="warning" class="alert alert-warning alert-dismissible mb-0" role="alert"
-                    style="display: none;">
-                    <strong>Warning!</strong> <span id="warningText">Warning Message.</span>
-                    <button type="button" class="close" aria-label="Close" onclick="closeWarning()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Warning Alert -->
-
-                <!-- Error Alert -->
-                <div id="error" class="alert alert-danger alert-dismissible mb-0" role="alert" style="display: none;">
-                    <strong>Error!</strong> <span id="errorText">Error Message</span>
-                    <button type="button" class="close" aria-label="Close" onclick="closeError()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <!-- Error Alert -->
-            </div>
-        </div>
-        <!-- Alert Row -->
-
-        <!-- Main Row -->
-        <div class="row" style="height: 100vh;">
-
-            <!-- First Column -->
-            <div class="col-3"
-                style="padding-top: 15px;padding-bottom: 15px;background-color: #F7F7F7;border-right: 2px solid #3498db">
-                <div class="card" style="border-color: #3498db">
-                    <h6 class="card-header" style="background-color: #2980B9; color: white">Enter Credentials</h6>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="anilistId">Your Anilist Username:&nbsp;</label>
-                            <input id="anilistId" type="text" placeholder="user123" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
-                            <input id="goodreadsId" type="text" placeholder="12345678" class="form-control" />
-                        </div>
-                        <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
-                            class="btn btn-primary">Get
-                            Recommendations</button>
-                    </div>
-                </div>
-                <!-- <br />
-                <div class="card" style="border-color: #3498db">
-                    <h6 class="card-header" style="background-color: #2980B9;color: white">Keywords & Statistics</h6>
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">Code Geass</li>
-                            <li class="list-group-item">The Hunger Games</li>
-                            <li class="list-group-item">Chocolate Factory</li>
-                            <li class="list-group-item">Death Note</li>
-                          </ul>
-                    </div>
-                </div> -->
-            </div>
-            <!-- First Column -->
-
-            <!-- Second Column -->
-            <div class="col d-flex flex-column pr-0 pl-0">
-
-                <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg navbar-dark"
-                    style="background-color: #2980B9; border-bottom: 2px solid #3498db">
-                    <span class="navbar-brand mb-0 h1">PCDRS Dashboard</span>
-                    <div class="collapse navbar-collapse  w-100 order-3 dual-collapse2" id="navbarNavDropdown">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    moizalicious@gmail.com
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#" data-toggle="modal"
-                                        data-target="#profileSettingsModal">Settings</a>
-                                    <a class="dropdown-item" href="#">Logout</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Profile Settings Modal -->
-                    <div class="modal fade" id="profileSettingsModal" tabindex="-1" role="dialog"
-                        aria-labelledby="profileSettingsModalTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="profileSettingsModalTitle">Profile Settings</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="x">Your Anilist Username:&nbsp;</label>
-                                        <input id="x" type="text" placeholder="user123" class="form-control" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="y">Your Goodreads ID:&nbsp;</label>
-                                        <input id="y" type="text" placeholder="12345678" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Profile Settings Modal -->
-                </nav>
-                <!-- Navbar -->
-
-                <!-- Body -->
-                <div id="recommendations" class="flex-grow-1 p-3" style="background-color: #ecf0f1;overflow-y: scroll">
-                </div>
-                <!-- Body -->
-
-            </div>
-            <!-- Second Column -->
-
-        </div>
-        <!-- Main Row -->
-
-    </div>
-    <!-- Main Container -->
+    <h1>Login</h1>
+    <span>Enter Username:</span>
+    <input type="text" />
+    <br />
+    <br />
+    <span>Enter Password:</span>
+    <input type="text" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1>Sign Up</h1>
+    <span>Enter Username:</span>
+    <input type="text" />
+    <br />
+    <br />
+    <span>Enter Password:</span>
+    <input type="text" />
+    <br />
+    <br />
+    <span>Confirm Password:</span>
+    <input type="text" />
+    <br />
+    <br />
+    <span>Anilist ID:</span>
+    <input type="text" />
+    <br />
+    <br />
+    <span>Goodreads ID:</span>
+    <input type="text" />
 </body>
-
-<script>
-    $(document).ready(function () {
-        var recommendationPanelHeight = $('#recommendations').outerHeight();
-        $('#recommendations').css('max-height', recommendationPanelHeight + 'px');
-        showNoContentPanel();
-    });
-
-    function showNoContentPanel() {
-        if (!$('#recommendations').hasClass('d-flex')) {
-            $('#recommendations').addClass('d-flex');
-        }
-        $('#recommendations').html(
-            '<div class="d-flex flex-column align-items-center justify-content-center flex-grow-1" style="color:#7f8c8d">' +
-            '<h3>Nothing To Show</h3>' +
-            '<p><i>Click On The "Get Recommendations" Button To See Recommended Items</i></p>' +
-            '</div>'
-        );
-    }
-
-    function showLoadingPanel() {
-        if (!$('#recommendations').hasClass('d-flex')) {
-            $('#recommendations').addClass('d-flex');
-        }
-        $('#recommendations').html(
-            '<div class="d-flex flex-column align-items-center justify-content-center flex-grow-1" style="color:#7f8c8d">' +
-            '<div class="spinner-border text-primary" role="status">' +
-            '<span class="sr-only">Loading...</span>' +
-            '</div>' +
-            '<h3 class="mt-3">Loading Items...</h3>' +
-            '</div>'
-        );
-    }
-</script>
 
 </html>
