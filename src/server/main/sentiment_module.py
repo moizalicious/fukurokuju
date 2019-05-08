@@ -12,19 +12,19 @@ def sentiment(text):
     sentences = sent_tokenize(text)
     for sentence in sentences:
         compound_score = analyzer.polarity_scores(sentence)['compound']
-        if compound_score >= 0.5:
+        if compound_score > 0:
             pos+=1
-        elif compound_score <= -0.5:
+        elif compound_score <= 0:
             neg+=1
         else:
             neu+=1
     
     analysis = TextBlob(text)
     for sentence in analysis.sentences:
-        if sentence.sentiment.subjectivity <= 0.5:
-            if sentence.sentiment.polarity >= 0.5:
+        if sentence.sentiment.subjectivity > 0.9:
+            if sentence.sentiment.polarity > 0:
                 pos+=1
-            elif sentence.sentiment.polarity <= -0.5:
+            elif sentence.sentiment.polarity <= 0:
                 neg+=1
             else:
                 neu+=1
