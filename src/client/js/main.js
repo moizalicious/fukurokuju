@@ -9,22 +9,38 @@ var goodreadsData = {};
 var goodreadsReviews = [];
 
 function checkIfSignedIn() {
-    var username = sessionStorage.getItem('email');
+    var email = sessionStorage.getItem('email');
     var anilistId = sessionStorage.getItem('anilistId');
     var goodreadsId = sessionStorage.getItem('goodreadsId');
-    if (username && anilistId && goodreadsId) {
-        //TODO
+    if (email && (anilistId || goodreadsId)) {
+        $('#anilistId').val(anilistId);
+        $('#anilistIdText').val(anilistId);
+        $('#goodreadsId').val(goodreadsId);
+        $('#goodreadsIdText').val(goodreadsId);
+        $('#navbarDropdownMenuLink').text(email);
     } else {
         window.location.replace('../../');
     }
 }
-checkIfSignedIn();
+
+$(document).ready(function () {
+    checkIfSignedIn();
+    var recommendationPanelHeight = $('#recommendations').outerHeight();
+    $('#recommendations').css('max-height', recommendationPanelHeight + 'px');
+    showNoContentPanel();
+    $('#anilistIdText').on('change paste keyup', function() {
+        $('#saveChanges').attr('disabled', false);
+    });
+    $('#goodreadsIdText').on('change paste keyup', function() {
+        $('#saveChanges').attr('disabled', false);
+    });
+});
 
 function onGetRecommendationsClick() {
     flush();
 
-    var anilistId = document.getElementById('anilistId').value;
-    var goodreadsId = document.getElementById('goodreadsId').value;
+    var anilistId = sessionStorage.getItem('anilistId');
+    var goodreadsId = sessionStorage.getItem('goodreadsId');
     if (anilistId != '' && goodreadsId != '') {
         $('#getRecommendationsButton').prop('disabled', true);
         showLoadingPanel();
@@ -70,4 +86,76 @@ function flush() {
     anilistReviews = [];
     goodreadsData = {};
     goodreadsReviews = [];
+}
+
+function logout() {
+    sessionStorage.clear();
+    window.location.replace('../../');
+}
+
+function showNoContentPanel() {
+    if (!$('#recommendations').hasClass('d-flex')) {
+        $('#recommendations').addClass('d-flex');
+    }
+    $('#recommendations').html(
+        '<div class="d-flex flex-column align-items-center justify-content-center flex-grow-1" style="color:#7f8c8d">' +
+        '<h3>Nothing To See Here</h3>' +
+        '<p><i>Click On The "Get Recommendations" Button To See Recommended Items</i></p>' +
+        '</div>'
+    );
+}
+
+function showLoadingPanel() {
+    if (!$('#recommendations').hasClass('d-flex')) {
+        $('#recommendations').addClass('d-flex');
+    }
+    $('#recommendations').html(
+        '<div class="d-flex flex-column align-items-center justify-content-center flex-grow-1" style="color:#7f8c8d">' +
+        '<div class="spinner-border text-primary" role="status">' +
+        '<span class="sr-only">Loading...</span>' +
+        '</div>' +
+        '<h3 class="mt-3">Loading Items...</h3>' +
+        '</div>'
+    );
+}
+
+function onSaveChangesClick() {
+    var anilistId = $('#anilistIdText').val();
+    var goodreadsId = $('#goodreadsIdText').val();
+
+    if (anilistId || goodreadsId) {
+        Database.get('/users?email='+sessionStorage.getItem('email'), function(data) {
+            if (data[0]) {
+                var user = {
+                    id: data[0].id,
+                    email: data[0].email,
+                    password: data[0].password,
+                    anilistId: anilistId,
+                    goodreadsId: goodreadsId
+                };
+                Database.put('/users/'+data[0].id, user, function(data) {
+                    if (data) {
+                        sessionStorage.setItem('email', data.email);
+                        sessionStorage.setItem('anilistId', data.anilistId);
+                        sessionStorage.setItem('goodreadsId', goodreadsId);
+                        $('#anilistId').val(data.anilistId);
+                        $('#goodreadsId').val(data.goodreadsId);
+                        $('#saveChanges').attr('disabled', true);
+                    } else {
+                        showError('Something went wrong');
+                    }
+                }, function(error) {
+                    showError(error);
+                });
+            } else {
+                showError('Something went wrong');
+            }
+        }, function(error) {
+            showError(error);
+        });
+    } else {
+        showWarning('Atleast One Field Needs To Be Filled');
+        $('#anilistIdText').val(sessionStorage.getItem('anilistId'));
+        $('#goodreadsIdText').val(sessionStorage.getItem('goodreadsId'));
+    }
 }

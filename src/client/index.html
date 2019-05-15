@@ -7,7 +7,7 @@
     <meta name="description" content="A Personalized Cross-Domain Recommendation System [Front-End]" />
     <meta name="author" content="Moiz Mansoor Ali" />
 
-    <title>PCDRS Dashboard</title>
+    <title>PCDRS</title>
 
     <script src="lib/jquery-3.3.1/jquery-3.3.1.slim.min.js"></script>
     <script src="lib/popperjs/popper.min.js"></script>
@@ -16,40 +16,69 @@
     <script src="lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
     <script src="js/db/db_interface.js"></script>
+    <script src="js/alert/alert.js"></script>
+
     <script src="js/index.js"></script>
 </head>
 
 <body>
+    <!-- Alert Row -->
+    <div class="row position-fixed p-3" style="z-index: 1000;width: 100%;">
+        <div class="col d-flex justify-content-center">
+            <!-- Warning Alert -->
+            <div id="warning" class="alert alert-warning alert-dismissible mb-0" role="alert" style="display: none;">
+                <strong>Warning!</strong> <span id="warningText">Warning Message.</span>
+                <button type="button" class="close" aria-label="Close" onclick="closeWarning()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Warning Alert -->
+
+            <!-- Error Alert -->
+            <div id="error" class="alert alert-danger alert-dismissible mb-0" role="alert" style="display: none;">
+                <strong>Error!</strong> <span id="errorText">Error Message</span>
+                <button type="button" class="close" aria-label="Close" onclick="closeError()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Error Alert -->
+        </div>
+    </div>
+    <!-- Alert Row -->
+
+    <h1>Recommendations, When You Require It</h1>
     <h1>Login</h1>
-    <span>Enter Username:</span>
-    <input type="text" />
+    <span>Enter Email Address:</span>
+    <input id="loginEmail" type="text" />
     <br />
     <br />
     <span>Enter Password:</span>
-    <input type="text" />
+    <input id="loginPassword" type="text" />
+    <button onclick="onLoginClick()">Login</button>
     <br />
     <br />
     <br />
     <br />
     <h1>Sign Up</h1>
-    <span>Enter Username:</span>
-    <input type="text" />
+    <span>Enter Email Address:</span>
+    <input id="signupEmail" type="text" />
     <br />
     <br />
     <span>Enter Password:</span>
-    <input type="text" />
+    <input id="signupPassword" type="text" />
     <br />
     <br />
     <span>Confirm Password:</span>
-    <input type="text" />
+    <input id="signupConfirmPassword" type="text" />
     <br />
     <br />
     <span>Anilist ID:</span>
-    <input type="text" />
+    <input id="signupAnilistId" type="text" />
     <br />
     <br />
     <span>Goodreads ID:</span>
-    <input type="text" />
+    <input id="signupGoodreadsId" type="text" />
+    <button onclick="onSignupClick()">Sign Up</button>
 </body>
 
 </html>

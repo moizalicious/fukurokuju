@@ -4,7 +4,7 @@ class DBInterface {
         this.url = url;
     }
 
-    get(path, callback) {
+    get(path, callback, errorHandler) {
         var options = {
             method: 'GET',
             headers: {
@@ -18,19 +18,17 @@ class DBInterface {
                 return response.json();
             })
             .then(callback)
-            .catch(function (error) {
-                console.error(error);
-            });
+            .catch(errorHandler);
     }
 
-    put(path, value, callback) {
+    put(path, value, callback, errorHandler) {
         var options = {
-            method: 'GET',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: value
+            body: JSON.stringify(value)
         };
 
         fetch(this.url + path, options)
@@ -38,19 +36,17 @@ class DBInterface {
                 return response.json();
             })
             .then(callback)
-            .catch(function (error) {
-                console.error(error);
-            });
+            .catch(errorHandler);
     }
 
-    post(path, value, callback) {
+    post(path, value, callback, errorHandler) {
         var options = {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: value
+            body: JSON.stringify(value)
         };
 
         fetch(this.url + path, options)
@@ -58,9 +54,7 @@ class DBInterface {
                 return response.json();
             })
             .then(callback)
-            .catch(function (error) {
-                console.error(error);
-            });
+            .catch(errorHandler);
     }
 
 }
