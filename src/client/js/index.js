@@ -20,12 +20,12 @@ function onLoginClick() {
     } else if (password == undefined || password == '') {
         console.log('Password field cannot be empty');
     } else {
-        Database.get('/users?email=' + email + '&password=' + password, function (data) {
+        Database.get('/users?email=' + btoa(email) + '&password=' + btoa(password), function (data) {
             console.log(data);
             if (data.length == 1) {
-                sessionStorage.setItem('email', data[0].email);
-                sessionStorage.setItem('anilistId', data[0].anilistId);
-                sessionStorage.setItem('goodreadsId', data[0].goodreadsId);
+                sessionStorage.setItem('email', atob(data[0].email));
+                sessionStorage.setItem('anilistId', atob(data[0].anilistId));
+                sessionStorage.setItem('goodreadsId', atob(data[0].goodreadsId));
                 window.location.replace('/html/main');
             } else if (data.length > 1) {
                 showError('Multiple Inputs of the same credentials found');
@@ -55,21 +55,21 @@ function onSignupClick() {
         console.log('anilist/goodreads field cannot be empty');
     } else {
         if (password == confirmPassword) {
-            Database.get('/users?email=' + email, function (data) {
+            Database.get('/users?email=' + btoa(email), function (data) {
                 if (data[0]) {
                     showWarning('A user with the given email address already exists, please try another one');
                 } else {
                     var user = {
-                        email: email,
-                        password: password,
-                        anilistId: anilistId,
-                        goodreadsId: goodreadsId
+                        email: btoa(email),
+                        password: btoa(password),
+                        anilistId: btoa(anilistId),
+                        goodreadsId: btoa(goodreadsId)
                     };
                     Database.post('/users', user, function (data) {
                         if (data) {
-                            sessionStorage.setItem('email', data.email);
-                            sessionStorage.setItem('anilistId', data.anilistId);
-                            sessionStorage.setItem('goodreadsId', data.goodreadsId);
+                            sessionStorage.setItem('email', atob(data.email));
+                            sessionStorage.setItem('anilistId', atob(data.anilistId));
+                            sessionStorage.setItem('goodreadsId', atob(data.goodreadsId));
                             window.location.replace('/html/main');
                         }
                     }, function (error) {

@@ -19,10 +19,13 @@ class AnilistUtils {
             anilistData.reviews = anilistReviews;
             Backend.request(PythonRoute.GET_ANILIST_KEYWORDS, anilistData, function (response) {
                 if (response[0]) {
-                    response.forEach(function (title) {
-                        title = title.replace(regex, '%20');
+                    response.forEach(function(keyword) {
+                        if ($('#keywords').html() == '<li class="list-group-item text-center">Obtaining Keywords...</li>') {
+                            $('#keywords').html('');
+                        }
+                        $('#keywords').append('<li class="list-group-item text-center">'+keyword.title+'</li>');
+                        var title = keyword.title.replace(regex, '%20');
                         Ebay.request(EbayRoute.GET_ITEMS + title, EbayUtils.handleEbayItemRequest);
-
                     });
                 } else {
                     showError(response);

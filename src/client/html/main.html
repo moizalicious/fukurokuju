@@ -84,7 +84,8 @@
                         </div>
                         <div class="form-group">
                             <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
-                            <input id="goodreadsId" type="text" placeholder="N/A" class="form-control" disabled="true" />
+                            <input id="goodreadsId" type="text" placeholder="N/A" class="form-control"
+                                disabled="true" />
                         </div>
                         <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
                             class="btn btn-primary">Get
@@ -94,13 +95,10 @@
                 <br />
                 <div class="card" style="border-color: #3498db">
                     <h6 class="card-header" style="background-color: #2980B9;color: white">Keywords & Statistics</h6>
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">Code Geass</li>
-                            <li class="list-group-item">The Hunger Games</li>
-                            <li class="list-group-item">Chocolate Factory</li>
-                            <li class="list-group-item">Death Note</li>
-                          </ul>
+                    <div class="card-body" style="overflow-y: scroll; max-height: 230px">
+                        <ul class="list-group" id="keywords">
+                            <li class="list-group-item text-center">No Keywords Identified</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -151,7 +149,8 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="saveChanges" onclick="onSaveChangesClick()" disabled="true">Save changes</button>
+                                    <button type="button" class="btn btn-primary" id="saveChanges"
+                                        onclick="onSaveChangesClick()" disabled="true">Save changes</button>
                                 </div>
                             </div>
                         </div>

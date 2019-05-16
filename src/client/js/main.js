@@ -28,10 +28,10 @@ $(document).ready(function () {
     var recommendationPanelHeight = $('#recommendations').outerHeight();
     $('#recommendations').css('max-height', recommendationPanelHeight + 'px');
     showNoContentPanel();
-    $('#anilistIdText').on('change paste keyup', function() {
+    $('#anilistIdText').on('change paste keyup', function () {
         $('#saveChanges').attr('disabled', false);
     });
-    $('#goodreadsIdText').on('change paste keyup', function() {
+    $('#goodreadsIdText').on('change paste keyup', function () {
         $('#saveChanges').attr('disabled', false);
     });
 });
@@ -44,14 +44,17 @@ function onGetRecommendationsClick() {
     if (anilistId != '' && goodreadsId != '') {
         $('#getRecommendationsButton').prop('disabled', true);
         showLoadingPanel();
+        $('#keywords').html('<li class="list-group-item text-center">Obtaining Keywords...</li>');
         getAnilistAndGoodreadsData(anilistId, goodreadsId);
     } else if (anilistId != '') {
         $('#getRecommendationsButton').prop('disabled', true);
         showLoadingPanel();
+        $('#keywords').html('<li class="list-group-item text-center">Obtaining Keywords...</li>');
         getAnilistData(anilistId);
     } else if (goodreadsId != '') {
         $('#getRecommendationsButton').prop('disabled', true);
         showLoadingPanel();
+        $('#keywords').html('<li class="list-group-item text-center">Obtaining Keywords...</li>');
         getGoodreadsData(goodreadsId);
     } else {
         showWarning('You have not entered your Anilist or Goodreads credentials');
@@ -124,33 +127,33 @@ function onSaveChangesClick() {
     var goodreadsId = $('#goodreadsIdText').val();
 
     if (anilistId || goodreadsId) {
-        Database.get('/users?email='+sessionStorage.getItem('email'), function(data) {
+        Database.get('/users?email=' + btoa(sessionStorage.getItem('email')), function (data) {
             if (data[0]) {
                 var user = {
                     id: data[0].id,
                     email: data[0].email,
                     password: data[0].password,
-                    anilistId: anilistId,
-                    goodreadsId: goodreadsId
+                    anilistId: btoa(anilistId),
+                    goodreadsId: btoa(goodreadsId)
                 };
-                Database.put('/users/'+data[0].id, user, function(data) {
+                Database.put('/users/' + data[0].id, user, function (data) {
                     if (data) {
-                        sessionStorage.setItem('email', data.email);
-                        sessionStorage.setItem('anilistId', data.anilistId);
-                        sessionStorage.setItem('goodreadsId', goodreadsId);
-                        $('#anilistId').val(data.anilistId);
-                        $('#goodreadsId').val(data.goodreadsId);
+                        sessionStorage.setItem('email', atob(data.email));
+                        sessionStorage.setItem('anilistId', atob(data.anilistId));
+                        sessionStorage.setItem('goodreadsId', atob(data.goodreadsId));
+                        $('#anilistId').val(atob(data.anilistId));
+                        $('#goodreadsId').val(atob(data.goodreadsId));
                         $('#saveChanges').attr('disabled', true);
                     } else {
                         showError('Something went wrong');
                     }
-                }, function(error) {
+                }, function (error) {
                     showError(error);
                 });
             } else {
                 showError('Something went wrong');
             }
-        }, function(error) {
+        }, function (error) {
             showError(error);
         });
     } else {

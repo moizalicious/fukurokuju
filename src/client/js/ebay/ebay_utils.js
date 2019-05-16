@@ -10,9 +10,9 @@ class EbayUtils {
             $('#recommendations').html('');
         }
 
-        console.log(response);
+        // console.log(response);
         var items = response.findItemsAdvancedResponse[0].searchResult[0].item;
-        console.log(items);
+        // console.log(items);
         if (items) {
             items.forEach(function (item) {
                 if ((i % 3) == 0) {

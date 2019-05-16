@@ -6,7 +6,7 @@ def getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored):
     for entry in reviewed_and_scored:
         sent_type = sentiment(entry['body'])
         if entry['entryScore'] >= 70 and entry['reviewScore'] >= 70 and (sent_type == 'pos' or sent_type == 'nue'):
-            top_reviewed_and_scored_entries.append(entry['title'])
+            top_reviewed_and_scored_entries.append({ 'title': entry['title'], 'stats': generateAnilistStats(entry) })
 
     top_anime_entries = []
     for anime in animelist:
@@ -14,10 +14,10 @@ def getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored):
             sent_type = sentiment(anime['notes'])
             if anime['score'] >= 70:
                 if sent_type == 'pos' or sent_type == 'neu':
-                    top_anime_entries.append(anime['title'])
+                    top_anime_entries.append({ 'title': anime['title'], 'stats': generateAnilistStats(anime) })
         elif anime['score']:
             if anime['score'] >= 90:
-                top_anime_entries.append(anime['title'])
+                top_anime_entries.append({ 'title': anime['title'], 'stats': generateAnilistStats(anime) })
 
     top_manga_entries = []
     for manga in mangalist:
@@ -25,16 +25,16 @@ def getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored):
             sent_type = sentiment(manga['notes'])
             if manga['score'] >= 70:
                 if sent_type == 'pos' or sent_type == 'neu':
-                    top_manga_entries.append(manga['title'])
+                    top_manga_entries.append({ 'title': manga['title'], 'stats': generateAnilistStats(manga) })
         elif manga['score']:
             if manga['score'] >= 90:
-                top_manga_entries.append(manga['title'])
+                top_manga_entries.append({ 'title': manga['title'], 'stats': generateAnilistStats(manga) })
 
     top_review_entries = []
     for review in reviews:
         sent_type = sentiment(review['body'])
         if review['score'] >= 70 and (sent_type == 'pos' or sent_type == 'neu'):
-            top_review_entries.append(review['title'])
+            top_review_entries.append({ 'title': review['title'], 'stats': generateAnilistStats(review) })
 
     top_entries = []
     if len(top_reviewed_and_scored_entries) >= 5:
@@ -43,7 +43,8 @@ def getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored):
         top_entries.extend(top_reviewed_and_scored_entries)
 
     top_anime_entries.extend(top_manga_entries)
-    random.shuffle(top_anime_entries)
+    # Not Needed
+    # random.shuffle(top_anime_entries)
     if len(top_anime_entries) >= (5 - len(top_entries)):
         top_entries.extend(top_anime_entries[:5 - len(top_entries)])
     else:
@@ -65,17 +66,17 @@ def getTopGoodreadsEntries(reviews):
             sent_type = sentiment(review['body'])
             if review['rating'] >= 4:
                 if sent_type == 'pos' or sent_type == 'neu':
-                    top_reviewed_and_rated_entries.append(review['title'])
+                    top_reviewed_and_rated_entries.append({ 'title': review['title'], 'stats': generateGoodreadsStats(review) })
             elif review['rating'] == 3:
                 if sent_type == 'pos':
-                    top_reviewed_and_rated_entries.append(review['title'])
+                    top_reviewed_and_rated_entries.append({ 'title': review['title'], 'stats': generateGoodreadsStats(review) })
         elif review['rating']:
             if review['rating'] == 5:
-                top_rated_entries.append(review['title'])
+                top_rated_entries.append({ 'title': review['title'], 'stats': generateGoodreadsStats(review) })
         elif review['body']:
             sent_type = sentiment(review['body'])
             if sent_type == 'pos':
-                top_reviewed_entries.append(review['title'])
+                top_reviewed_entries.append({ 'title': review['title'], 'stats': generateGoodreadsStats(review) })
 
     top_entries = []
     if len(top_reviewed_and_rated_entries) >= 5:
@@ -94,3 +95,21 @@ def getTopGoodreadsEntries(reviews):
         top_entries.extend(top_reviewed_entries)
 
     return top_entries
+
+def generateAnilistStats(entry):
+    stats = {
+        'source': 'Anilist',
+        'entryScore': '',
+        'notesSentiment': '',
+        'reviewScore': '',
+        'reviewSentiment': ''
+    }
+    return stats
+
+def generateGoodreadsStats(entry):
+    stats = {
+        'source': 'Goodreads',
+        'score': '',
+        'reviewScore': ''
+    }
+    return stats
