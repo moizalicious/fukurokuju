@@ -1,6 +1,5 @@
-from main.sentiment_module import sentiment
-from main.filtering_module import getTopEntries
-from main.utils import AnilistUtils
+from main.filtering_module import getTopAnilistEntries, getTopGoodreadsEntries
+from main.utils import AnilistUtils, GoodreadsUtils
 
 def extractAnilistKeywords(anilist_user_data):
     # Get anime list data, remove unscored entries and duplicate media titles
@@ -26,26 +25,29 @@ def extractAnilistKeywords(anilist_user_data):
     mangalist = AnilistUtils.removeDuplicateMangaEntries(mangalist, reviewed_and_scored)
     reviews = AnilistUtils.removeDuplicateReviews(reviews, reviewed_and_scored)
     
-    keywords = []
-    if len(animelist) >= 5:
-        for i in range(0, 5):
-            keywords.append(animelist[i]['title'])
-    elif len(animelist) < 5:
-        for anime in animelist:
-            keywords.append(anime['title'])
+    keywords = getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored)
+    print('Anilist Keywords: ', keywords)
+    # if len(animelist) >= 5:
+    #     for i in range(0, 5):
+    #         keywords.append(animelist[i]['title'])
+    # elif len(animelist) < 5:
+    #     for anime in animelist:
+    #         keywords.append(anime['title'])
 
     return keywords
 
 def extractGoodreadsKeywords(goodreads_user_data):
-    keywords = []
-    if len(goodreads_user_data['reviews']) >= 5:
-        for i in range(0,5):
-            keywords.append(goodreads_user_data['reviews'][i]['book']['title'])
-    elif len(goodreads_user_data['reviews']) < 5:
-        for review in goodreads_user_data['reviews']:
-            keywords.append(review['book']['title'])
+    # Get Goodreads review information and remove unwanted information
+    reviews = goodreads_user_data['reviews']
+    reviews = GoodreadsUtils.removeUnwantedInformation(reviews)
+
+    keywords = getTopGoodreadsEntries(reviews)
+    print('Goodreads Keywords: ', keywords)
+    # if len(goodreads_user_data['reviews']) >= 5:
+    #     for i in range(0,5):
+    #         keywords.append(goodreads_user_data['reviews'][i]['book']['title'])
+    # elif len(goodreads_user_data['reviews']) < 5:
+    #     for review in goodreads_user_data['reviews']:
+    #         keywords.append(review['book']['title'])
 
     return keywords
-
-    # for review in goodreads_user_data['reviews']:
-        # print('Title: ',review['book']['title'],'Rating: ',review['rating'],'Body: ',review['body'])

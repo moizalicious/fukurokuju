@@ -33,7 +33,7 @@ class AnilistUtils:
                         entry = {}
                         entry['title'] = review['title']
                         entry['type'] = review['type']
-                        entry['animeScore'] = anime['score']
+                        entry['entryScore'] = anime['score']
                         entry['reviewScore'] = review['score']
                         entry['body'] = review['body']
                         entry['notes'] = anime['notes']
@@ -44,7 +44,7 @@ class AnilistUtils:
                         entry = {}
                         entry['title'] = review['title']
                         entry['type'] = review['type']
-                        entry['animeScore'] = manga['score']
+                        entry['entryScore'] = manga['score']
                         entry['reviewScore'] = review['score']
                         entry['body'] = review['body']
                         entry['notes'] = manga['notes']
@@ -80,3 +80,24 @@ def getMediaTitle(media):
     elif media['title']['romaji'] != None:
         title = media['title']['romaji']
     return title
+
+
+class GoodreadsUtils:
+
+    def removeUnwantedInformation(reviews):
+        reviewlist = []
+        for review in reviews:
+            if type(review['body']) == dict:
+                updated_review = {
+                    'title': review['book']['title'],
+                    'rating': int(review['rating']),
+                    'body': review['body']['__cdata']
+                }
+            else:
+                updated_review = {
+                    'title': review['book']['title'],
+                    'rating': int(review['rating']),
+                    'body': ''
+                }
+            reviewlist.append(updated_review)
+        return reviewlist
