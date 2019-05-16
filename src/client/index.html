@@ -22,63 +22,115 @@
 </head>
 
 <body>
-    <!-- Alert Row -->
-    <div class="row position-fixed p-3" style="z-index: 1000;width: 100%;">
-        <div class="col d-flex justify-content-center">
-            <!-- Warning Alert -->
-            <div id="warning" class="alert alert-warning alert-dismissible mb-0" role="alert" style="display: none;">
-                <strong>Warning!</strong> <span id="warningText">Warning Message.</span>
-                <button type="button" class="close" aria-label="Close" onclick="closeWarning()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- Warning Alert -->
+    <!-- Main Container -->
+    <div class="container-fluid">
 
-            <!-- Error Alert -->
-            <div id="error" class="alert alert-danger alert-dismissible mb-0" role="alert" style="display: none;">
-                <strong>Error!</strong> <span id="errorText">Error Message</span>
-                <button type="button" class="close" aria-label="Close" onclick="closeError()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <!-- Alert Row -->
+        <div class="row position-fixed p-3" style="z-index: 1000;width: 100%;">
+            <div class="col d-flex justify-content-center">
+                <!-- Warning Alert -->
+                <div id="warning" class="alert alert-warning alert-dismissible mb-0" role="alert"
+                    style="display: none;">
+                    <strong>Warning!</strong> <span id="warningText">Warning Message.</span>
+                    <button type="button" class="close" aria-label="Close" onclick="closeWarning()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Warning Alert -->
+
+                <!-- Error Alert -->
+                <div id="error" class="alert alert-danger alert-dismissible mb-0" role="alert" style="display: none;">
+                    <strong>Error!</strong> <span id="errorText">Error Message</span>
+                    <button type="button" class="close" aria-label="Close" onclick="closeError()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Error Alert -->
             </div>
-            <!-- Error Alert -->
         </div>
-    </div>
-    <!-- Alert Row -->
+        <!-- Alert Row -->
 
-    <h1>Recommendations, When You Require It</h1>
-    <h1>Login</h1>
-    <span>Enter Email Address:</span>
-    <input id="loginEmail" type="text" />
-    <br />
-    <br />
-    <span>Enter Password:</span>
-    <input id="loginPassword" type="text" />
-    <button onclick="onLoginClick()">Login</button>
-    <br />
-    <br />
-    <br />
-    <br />
-    <h1>Sign Up</h1>
-    <span>Enter Email Address:</span>
-    <input id="signupEmail" type="text" />
-    <br />
-    <br />
-    <span>Enter Password:</span>
-    <input id="signupPassword" type="text" />
-    <br />
-    <br />
-    <span>Confirm Password:</span>
-    <input id="signupConfirmPassword" type="text" />
-    <br />
-    <br />
-    <span>Anilist ID:</span>
-    <input id="signupAnilistId" type="text" />
-    <br />
-    <br />
-    <span>Goodreads ID:</span>
-    <input id="signupGoodreadsId" type="text" />
-    <button onclick="onSignupClick()">Sign Up</button>
+        <!-- Main Row -->
+        <div class="d-flex flex-column">
+            <!-- Header Row -->
+            <div class="row p-3">
+                <div class="col">
+                    <h1 class="text-center m-0">Recommendations, When You Require It</h1>
+                </div>
+            </div>
+            <!-- Header Row -->
+
+            <!-- Sign Up/Login Row -->
+            <div class="row p-3">
+
+                <!-- Sign Up Column -->
+                <div class="col pt-3 pb-3 d-flex flex-column">
+                    <div class="card" style="border-color: #3498db">
+                        <h6 class="card-header" style="background-color: #2980B9; color: white">Enter Credentials</h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="anilistId">Enter Email Address:&nbsp;</label>
+                                <input id="anilistId" type="text" placeholder="moiz@pcdrs.com" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
+                                <input id="goodreadsId" type="text" placeholder="N/A" class="form-control"
+                                    disabled="true" />
+                            </div>
+                            <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
+                                class="btn btn-primary">Get
+                                Recommendations</button>
+                        </div>
+                    </div>
+                    <h1>Sign Up</h1>
+                    <span>Enter Email Address:</span>
+                    <input id="signupEmail" type="text" />
+                    <span>Enter Password:</span>
+                    <input id="signupPassword" type="text" />
+                    <span>Confirm Password:</span>
+                    <input id="signupConfirmPassword" type="text" />
+                    <span>Anilist ID:</span>
+                    <input id="signupAnilistId" type="text" />
+                    <span>Goodreads ID:</span>
+                    <input id="signupGoodreadsId" type="text" />
+                    <button onclick="onSignupClick()">Sign Up</button>
+                </div>
+                <!-- Sign Up Column -->
+
+                <!-- Login Column -->
+                <div class="col pt-3 pb-3 d-flex flex-column">
+                    <div class="card" style="border-color: #3498db">
+                        <h6 class="card-header" style="background-color: #2980B9; color: white">Enter Credentials</h6>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="anilistId">Enter Email Address:&nbsp;</label>
+                                <input id="anilistId" type="text" placeholder="moiz@pcdrs.com" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
+                                <input id="goodreadsId" type="text" placeholder="N/A" class="form-control"
+                                    disabled="true" />
+                            </div>
+                            <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
+                                class="btn btn-primary">Get
+                                Recommendations</button>
+                        </div>
+                    </div>
+                    <h1>Login</h1>
+                    <span>Enter Email Address:</span>
+                    <input id="loginEmail" type="text" />
+                    <span>Enter Password:</span>
+                    <input id="loginPassword" type="text" />
+                    <button onclick="onLoginClick()">Login</button>
+                </div>
+                <!-- Login Column -->
+            </div>
+            <!-- Sign Up/Login Row -->
+        </div>
+        <!-- Main Row -->
+
+    </div>
+    <!-- Main Container -->
 </body>
 
 </html>
