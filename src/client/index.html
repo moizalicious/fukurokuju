@@ -23,7 +23,7 @@
 
 <body>
     <!-- Main Container -->
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: #ECF0F1">
 
         <!-- Alert Row -->
         <div class="row position-fixed p-3" style="z-index: 1000;width: 100%;">
@@ -53,75 +53,63 @@
         <!-- Main Row -->
         <div class="d-flex flex-column">
             <!-- Header Row -->
-            <div class="row p-3">
+            <div class="row p-3" style="color: #7f8c8d">
                 <div class="col">
-                    <h1 class="text-center m-0">Recommendations, When You Require It</h1>
+                    <h1 class="text-center m-0">PCDRS - Recommendations, When You Require It</h1>
                 </div>
             </div>
             <!-- Header Row -->
 
             <!-- Sign Up/Login Row -->
-            <div class="row p-3">
+            <div class="row p-3 ml-5 mr-5 d-flex justify-content-center">
 
                 <!-- Sign Up Column -->
-                <div class="col pt-3 pb-3 d-flex flex-column">
+                <div class="col pt-3 pb-3 d-flex flex-column" style="max-width: 30rem;">
                     <div class="card" style="border-color: #3498db">
-                        <h6 class="card-header" style="background-color: #2980B9; color: white">Enter Credentials</h6>
+                        <h6 class="card-header text-center" style="background-color: #2980B9; color: white">Sign Up</h6>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="anilistId">Enter Email Address:&nbsp;</label>
-                                <input id="anilistId" type="text" placeholder="moiz@pcdrs.com" class="form-control" />
+                                <label for="signupEmail">Email Address:&nbsp;</label>
+                                <input id="signupEmail" type="text" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
-                                <input id="goodreadsId" type="text" placeholder="N/A" class="form-control"
-                                    disabled="true" />
+                                <label for="signupPassword">Password:&nbsp;</label>
+                                <input id="signupPassword" type="password" class="form-control" />
                             </div>
-                            <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
-                                class="btn btn-primary">Get
-                                Recommendations</button>
+                            <div class="form-group">
+                                <label for="signupConfirmPassword">Confirm Password:&nbsp;</label>
+                                <input id="signupConfirmPassword" type="password" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupAnilistId">Anilist Username:&nbsp;</label>
+                                <input id="signupAnilistId" type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="signupGoodreadsId">Goodreads ID:&nbsp;</label>
+                                <input id="signupGoodreadsId" type="text" class="form-control" />
+                            </div>
+                            <button onclick="onSignupClick()" class="btn btn-primary w-100">Sign Up</button>
                         </div>
                     </div>
-                    <h1>Sign Up</h1>
-                    <span>Enter Email Address:</span>
-                    <input id="signupEmail" type="text" />
-                    <span>Enter Password:</span>
-                    <input id="signupPassword" type="text" />
-                    <span>Confirm Password:</span>
-                    <input id="signupConfirmPassword" type="text" />
-                    <span>Anilist ID:</span>
-                    <input id="signupAnilistId" type="text" />
-                    <span>Goodreads ID:</span>
-                    <input id="signupGoodreadsId" type="text" />
-                    <button onclick="onSignupClick()">Sign Up</button>
                 </div>
                 <!-- Sign Up Column -->
 
                 <!-- Login Column -->
-                <div class="col pt-3 pb-3 d-flex flex-column">
+                <div class="col pt-3 pb-3 d-flex flex-column" style="max-width: 30rem;">
                     <div class="card" style="border-color: #3498db">
-                        <h6 class="card-header" style="background-color: #2980B9; color: white">Enter Credentials</h6>
+                        <h6 class="card-header text-center" style="background-color: #2980B9; color: white">Login</h6>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="anilistId">Enter Email Address:&nbsp;</label>
-                                <input id="anilistId" type="text" placeholder="moiz@pcdrs.com" class="form-control" />
+                                <label for="loginEmail">Email Address:&nbsp;</label>
+                                <input id="loginEmail" type="text" class="form-control" />
                             </div>
                             <div class="form-group">
-                                <label for="goodreadsId">Your Goodreads ID:&nbsp;</label>
-                                <input id="goodreadsId" type="text" placeholder="N/A" class="form-control"
-                                    disabled="true" />
+                                <label for="loginPassword">Password:&nbsp;</label>
+                                <input id="loginPassword" type="password" class="form-control" />
                             </div>
-                            <button id="getRecommendationsButton" onclick="onGetRecommendationsClick()"
-                                class="btn btn-primary">Get
-                                Recommendations</button>
+                            <button onclick="onLoginClick()" class="btn btn-primary w-100">Login</button>
                         </div>
                     </div>
-                    <h1>Login</h1>
-                    <span>Enter Email Address:</span>
-                    <input id="loginEmail" type="text" />
-                    <span>Enter Password:</span>
-                    <input id="loginPassword" type="text" />
-                    <button onclick="onLoginClick()">Login</button>
                 </div>
                 <!-- Login Column -->
             </div>
