@@ -1,11 +1,11 @@
 from main.sentiment_module import sentiment
-import random
+# import random
 
 def getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored):
     top_reviewed_and_scored_entries = []
     for entry in reviewed_and_scored:
         sent_type = sentiment(entry['body'])
-        if entry['entryScore'] >= 70 and entry['reviewScore'] >= 70 and (sent_type == 'pos' or sent_type == 'nue'):
+        if entry['entryScore'] >= 70 and entry['reviewScore'] >= 70 and (sent_type == 'pos' or sent_type == 'neu'):
             top_reviewed_and_scored_entries.append({ 'title': entry['title'], 'stats': generateAnilistStats(entry) })
 
     top_anime_entries = []
@@ -43,7 +43,6 @@ def getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored):
         top_entries.extend(top_reviewed_and_scored_entries)
 
     top_anime_entries.extend(top_manga_entries)
-    # Not Needed
     # random.shuffle(top_anime_entries)
     if len(top_anime_entries) >= (5 - len(top_entries)):
         top_entries.extend(top_anime_entries[:5 - len(top_entries)])
@@ -97,19 +96,45 @@ def getTopGoodreadsEntries(reviews):
     return top_entries
 
 def generateAnilistStats(entry):
+    entryScore = ''
+    notesSentiment = ''
+    reviewScore = ''
+    reviewSentiment = ''
+
+    if 'entryScore' in entry and 'reviewScore' in entry and 'body' in entry:
+        entryScore = entry['entryScore']
+        reviewScore = entry['reviewScore']
+        reviewSentiment = sentiment(entry['body'])
+    elif 'score' in entry and 'notes' in entry:
+        entryScore = entry['score']
+        if entry['notes']:
+            notesSentiment = sentiment(entry['notes'])
+    elif 'score' in entry and 'body' in entry:
+        reviewScore = entry['score']
+        reviewSentiment = sentiment(entry['body'])
+
     stats = {
         'source': 'Anilist',
-        'entryScore': '',
-        'notesSentiment': '',
-        'reviewScore': '',
-        'reviewSentiment': ''
+        'entryScore': entryScore,
+        'notesSentiment': notesSentiment,
+        'reviewScore': reviewScore,
+        'reviewSentiment': reviewSentiment
     }
+    print(stats)
+
     return stats
 
 def generateGoodreadsStats(entry):
+    score = entry['rating']
+    reviewSentiment = ''
+    if 'body' in entry and entry['body']:
+        reviewSentiment = sentiment(entry['body'])
+
     stats = {
         'source': 'Goodreads',
-        'score': '',
-        'reviewScore': ''
+        'score': score,
+        'sentiment': reviewSentiment
     }
+    print(stats)
+
     return stats

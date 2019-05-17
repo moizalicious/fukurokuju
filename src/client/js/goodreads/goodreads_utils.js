@@ -10,7 +10,14 @@ class GoodreadsUtils {
                         if ($('#keywords').html() == '<li class="list-group-item text-center">Obtaining Keywords...</li>') {
                             $('#keywords').html('');
                         }
-                        $('#keywords').append('<li class="list-group-item text-center">'+keyword.title+'</li>');
+
+                        $('#keywords').append('<li class="list-group-item text-center" tabindex="0" ' +
+                        'role="button" data-toggle="popover" data-placement="bottom" ' +
+                        'data-trigger="focus" title="Keyword Information" ' +
+                        'data-content="'+JSON.stringify(keyword.stats).replace(/"/g, '')+'">' + 
+                        keyword.title+'</li>');
+                        $('[data-toggle="popover"]').popover();
+
                         var title = keyword.title.replace(regex, '%20');
                         Ebay.request(EbayRoute.GET_ITEMS + title, EbayUtils.handleEbayItemRequest);
                     });

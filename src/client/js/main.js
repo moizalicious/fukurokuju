@@ -162,3 +162,14 @@ function onSaveChangesClick() {
         $('#goodreadsIdText').val(sessionStorage.getItem('goodreadsId'));
     }
 }
+
+function openAnilistUserAccount() {
+    var anilistId = $('anilistId').val();
+    if (anilistId != '' && anilistId == null && anilistId != undefined) {
+        window.open('https://anilist.co/user/'+anilistId, '_blank');
+    }
+}
+
+function openGoodreadsUserAccount() {
+
+}
