@@ -1,4 +1,4 @@
-from main.sentiment_module import sentiment
+from vote_classifier import sentiment
 
 while True:
     review = input("Enter Review :> ")
