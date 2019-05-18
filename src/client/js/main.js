@@ -164,9 +164,9 @@ function onSaveChangesClick() {
 }
 
 function openAnilistUserAccount() {
-    var anilistId = $('anilistId').val();
+    var anilistId = $('#anilistId').val();
     if (anilistId != '' && anilistId == null && anilistId != undefined) {
-        window.open('https://anilist.co/user/'+anilistId, '_blank');
+        window.open('https://anilist.co/user/' + anilistId, '_blank');
     }
 }
 
