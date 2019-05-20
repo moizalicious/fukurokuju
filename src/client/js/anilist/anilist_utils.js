@@ -25,10 +25,21 @@ class AnilistUtils {
                             $('#keywords').html('');
                         }
 
+                        var source = keyword.stats.source;
+                        var score = 'N/A';
+                        if (keyword.stats.entryScore != '') {
+                            score = keyword.stats.entryScore;
+                        }
+                        var sentiment = 'N/A';
+                        if (keyword.stats.notesSentiment != '') {
+                            sentiment = keyword.stats.notesSentiment;
+                        } else if (keyword.stats.reviewSentiment != '') {
+                            sentiment = keyword.stats.reviewSentiment;
+                        }
                         $('#keywords').append('<li class="list-group-item text-center" tabindex="0" ' +
                         'role="button" data-toggle="popover" data-placement="bottom" ' +
                         'data-trigger="focus" title="Keyword Information" ' +
-                        'data-content="'+JSON.stringify(keyword.stats).replace(/"/g, '')+'">' + 
+                        'data-content="Source: '+source+', Score: '+score+', Sentiment: '+sentiment+'">' + 
                         keyword.title+'</li>');
                         $('[data-toggle="popover"]').popover();
 

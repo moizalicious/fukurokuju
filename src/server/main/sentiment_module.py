@@ -1,10 +1,11 @@
+# from main.res.vote_classifier import sentiment as vc_sentiment
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.tokenize import sent_tokenize
 from textblob import TextBlob
 
 analyzer = SentimentIntensityAnalyzer()
 
-def sentiment(text):
+def sentiment(text, isAnime):
     pos = 0
     neg = 0
     neu = 0
@@ -29,12 +30,22 @@ def sentiment(text):
             else:
                 neu+=1
 
-    sentiment = ''
-    if pos > neg & pos >= neu:
-        sentiment = 'pos'
-    elif neg > pos & neg >= neu:
-        sentiment = 'neg'
-    else:
-        sentiment = 'neu'
+    # if isAnime:
+    #     clasification, confidence = vc_sentiment(text)
+    #     if confidence >= 0.7:
+    #         if clasification == 'pos':
+    #             pos+=1
+    #         elif confidence == 'neg':
+    #             neg+=1
+    #         elif confidence == 'neu':
+    #             neu+=1
 
-    return sentiment
+    sentiment_value = ''
+    if pos > neg & pos >= neu:
+        sentiment_value = 'pos'
+    elif neg > pos & neg >= neu:
+        sentiment_value = 'neg'
+    else:
+        sentiment_value = 'neu'
+
+    return sentiment_value

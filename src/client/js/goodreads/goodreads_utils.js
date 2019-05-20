@@ -11,10 +11,19 @@ class GoodreadsUtils {
                             $('#keywords').html('');
                         }
 
+                        var source = keyword.stats.source;
+                        var score = 'N/A';
+                        if (keyword.stats.score != '') {
+                            score = keyword.stats.score;
+                        }
+                        var sentiment = 'N/A';
+                        if (keyword.stats.sentiment != '') {
+                            sentiment = keyword.stats.sentiment;
+                        }
                         $('#keywords').append('<li class="list-group-item text-center" tabindex="0" ' +
                         'role="button" data-toggle="popover" data-placement="bottom" ' +
                         'data-trigger="focus" title="Keyword Information" ' +
-                        'data-content="'+JSON.stringify(keyword.stats).replace(/"/g, '')+'">' + 
+                        'data-content="Source: '+source+', Score: '+score+', Sentiment: '+sentiment+'">' + 
                         keyword.title+'</li>');
                         $('[data-toggle="popover"]').popover();
 

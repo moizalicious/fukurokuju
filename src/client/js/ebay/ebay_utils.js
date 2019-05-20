@@ -34,8 +34,7 @@ class EbayUtils {
                     '<img src="' + imageURL + '" class="card-img-top" alt="' + imageURL + '">' +
                     '<div class="card-body">' +
                     '<h5 class="card-title">' + item.title[0] + '</h5>' +
-                    '<p class="card-text">Ebay Item</p>' +
-                    '<a href="' + item.viewItemURL[0] + '" class="btn btn-primary" target="_blank">View Item</a>' +
+                    '<a href="' + item.viewItemURL[0] + '" class="btn btn-primary w-100" target="_blank">View Item</a>' +
                     '</div>' +
                     '</div>' +
                     '</div>'
