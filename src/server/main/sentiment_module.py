@@ -22,13 +22,12 @@ def sentiment(text, isAnime):
     
     analysis = TextBlob(text)
     for sentence in analysis.sentences:
-        if sentence.sentiment.subjectivity > 0.9:
-            if sentence.sentiment.polarity > 0:
-                pos+=1
-            elif sentence.sentiment.polarity <= 0:
-                neg+=1
-            else:
-                neu+=1
+        if sentence.sentiment.polarity > 0:
+            pos+=1
+        elif sentence.sentiment.polarity <= 0:
+            neg+=1
+        else:
+            neu+=1
 
     # if isAnime:
     #     clasification, confidence = vc_sentiment(text)
@@ -41,9 +40,9 @@ def sentiment(text, isAnime):
     #             neu+=1
 
     sentiment_value = ''
-    if pos > neg & pos >= neu:
+    if pos > neg and pos >= neu:
         sentiment_value = 'pos'
-    elif neg > pos & neg >= neu:
+    elif neg > pos and neg >= neu:
         sentiment_value = 'neg'
     else:
         sentiment_value = 'neu'

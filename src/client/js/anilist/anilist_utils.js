@@ -20,7 +20,7 @@ class AnilistUtils {
             Backend.request(PythonRoute.GET_ANILIST_KEYWORDS, anilistData, function (response) {
                 if (response[0]) {
                     response.forEach(function(keyword) {
-                        console.log(keyword);
+                        // console.log(keyword);
                         if ($('#keywords').html() == '<li class="list-group-item text-center">Obtaining Keywords...</li>') {
                             $('#keywords').html('');
                         }

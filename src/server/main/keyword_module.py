@@ -26,13 +26,6 @@ def extractAnilistKeywords(anilist_user_data):
     reviews = AnilistUtils.removeDuplicateReviews(reviews, reviewed_and_scored)
     
     keywords = getTopAnilistEntries(animelist, mangalist, reviews, reviewed_and_scored)
-    print('Anilist Keywords: ', keywords)
-    # if len(animelist) >= 5:
-    #     for i in range(0, 5):
-    #         keywords.append(animelist[i]['title'])
-    # elif len(animelist) < 5:
-    #     for anime in animelist:
-    #         keywords.append(anime['title'])
 
     return keywords
 
@@ -42,12 +35,5 @@ def extractGoodreadsKeywords(goodreads_user_data):
     reviews = GoodreadsUtils.removeUnwantedInformation(reviews)
 
     keywords = getTopGoodreadsEntries(reviews)
-    print('Goodreads Keywords: ', keywords)
-    # if len(goodreads_user_data['reviews']) >= 5:
-    #     for i in range(0,5):
-    #         keywords.append(goodreads_user_data['reviews'][i]['book']['title'])
-    # elif len(goodreads_user_data['reviews']) < 5:
-    #     for review in goodreads_user_data['reviews']:
-    #         keywords.append(review['book']['title'])
 
     return keywords
